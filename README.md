@@ -26,34 +26,17 @@
     -i Movie.Dub.DN-31.EBUR128.ac3 -n "Dub, Blu-ray (DN -31dB, EBU R 128)" -l rus `
     -o Movie.2160p.HDR.DV81.Dub.DN-31.EBUR128.mp4 --overwrite `
 && `
-.\mp4box.exe `
+.\MP4Box.exe `
     Movie.2160p.HDR.DV81.Dub.DN-31.EBUR128.mp4 `
     -add Movie.srt:lang=rus:name="Forced"
 
-.\mp4box.exe `
+.\MP4Box.exe `
     Movie.2160p.HDR.DV81.Dub.DN-31.EBUR128.mp4 `
     -new -brand mp42isom -ab dby1 `
     -add Movie.hevc:dvp=f8.hdr10:xps_inband:hdr=none `
     -add Movie.Dub.DN-31.ac3:lang=rus:name="Dub, Blu-ray (DN -31dB)" `
     -add Movie.Dub.DN-31.EBUR128.ac3:lang=rus:name="Dub, Blu-ray (DN -31dB, EBU R 128)" `
     -add Movie.srt:lang=rus:name="Forced"
-
-./ffprobe ~/Movies/Movie.mkv
-
-./ffmpeg \
-    -hide_banner -nostats -nostdin
-    -i ~/Movies/Movie.mkv \
-    -map 0:1 \
-    -acodec copy \
-    ~/Movies/Movie.eac3
-
-./ffmpeg-audio-normalizer \
-    --verbose \
-    -i ~/Movies/Movie.dts \
-    -o ~/Movies/Movie.DN-31.EBUR128.eac3 \
-    ebu \
-    -- "-c:a" eac3 "-b:a" 1509k -dialnorm -31
-
 
 
 ### (2) Prepare Audio
@@ -123,7 +106,7 @@ ffmpeg-normalize `
 
 
 ### (3.1) GPAC MP4Box mux MP4 container (Dolby Vision Profile 8.1) with E-AC-3 audio
-mp4box.exe `
+MP4Box.exe `
     Movie.HDR.DV81.DN-31.EBUR128.mp4 `
     -new -brand mp42isom -ab dby1 `
     -add Movie.hevc:dvp=f8.hdr10:xps_inband:hdr=none `
@@ -140,12 +123,12 @@ mp4box.exe `
     --input-file Movie.DN-31.EBUR128.eac3 --media-lang rus --media-name "Dub, Blu-ray (DN -31dB, EBU R128)" `
     --output-file Movie.HDR.DV81.DN-31.EBUR128.mp4 --overwrite `
 && `
-mp4box.exe `
+MP4Box.exe `
     Movie.HDR.DV81.DN-31.EBUR128.mp4 `
     -add Movie.srt:lang=rus:name="Forced"
 
 ### (3.3) GPAC MP4Box mux MP4 container (Dolby Vision Profile 8.1) with AC-3 audio
-mp4box.exe `
+MP4Box.exe `
     Movie.HDR.DV81.DN-31.EBUR128.mp4 `
     -new -brand mp42isom -ab dby1 `
     -add Movie.hevc:dvp=f8.hdr10:xps_inband:hdr=none `
@@ -163,7 +146,7 @@ mp4box.exe `
     --input-file Movie.DN-31.EBUR128.ac3 --media-lang rus --media-name "Dub, Blu-ray (DN -31dB, EBU R128)" `
     --output-file Movie.HDR.DV81.DN-31.EBUR128.mp4 --overwrite `
 && `
-mp4box.exe `
+MP4Box.exe `
     Movie.HDR.DV81.DN-31.EBUR128.mp4 `
     -add Movie.srt:lang=rus:name="Forced"
 
@@ -266,7 +249,7 @@ ffmpeg-normalize `
 ### MP4 Container
 
 #### Add AC3 audios (original, RMS -23dB, Peak 0dB, EBU R128) and SRT subtitles to MP4
-.\mp4box.exe `
+.\MP4Box.exe `
     Movie.RMS-23.Peak0.EBUR128.mp4 `
     -add Movie.ac3:lang=rus:name="Dub, Blu-ray" `
     -add Movie.RMS-23.ac3:lang=rus:name="Dub, Blu-ray (RMS -23dB)" `
@@ -283,7 +266,7 @@ ffmpeg-normalize `
     --input-file Movie.EBUR128.eac3 --media-lang rus --media-name "Dub, Blu-ray (EBU R128)" `
     --output-file Movie.HDR.DV81.EBUR128.mp4 --overwrite `
 && `
-.\mp4box.exe `
+.\MP4Box.exe `
     Movie.HDR.DV81.EBUR128.mp4 `
     -add Movie.srt:lang=rus:name="Forced"
 
