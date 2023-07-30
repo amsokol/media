@@ -38,6 +38,35 @@
     -add Movie.Dub.DN-31.EBUR128.ac3:lang=rus:name="Dub, Blu-ray (DN -31dB, EBU R 128)" `
     -add Movie.srt:lang=rus:name="Forced"
 
+ffmpeg \
+    -i input.mkv \
+    -vf zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p10le \
+    -c:v libx265 \
+    -crf 10 \
+    -preset medium \
+    -tune film \
+    -c:a copy \
+    output.mkv
+
+ffmpeg \
+    -i input.mkv \
+    -vf zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p \
+    -c:v libx265 \
+    -crf 10 \
+    -r:v 30 \
+    -c:a copy \
+    -preset ultrafast \
+    -tune fastdecode \
+    -max_muxing_queue_size 1024 \
+    output.mkv
+
+ffmpeg \
+    -i input.mkv \
+    -vf zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p10le \
+    -c:v libx265 \
+    -crf 10 \
+    -preset fast \
+    output.mkv
 
 ### (2) Prepare Audio
 
